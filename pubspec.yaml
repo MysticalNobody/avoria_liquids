@@ -39,6 +39,7 @@ flutter:
     - icons/car.png
     - images/slider/1.png
     - images/slider/2.png
+    - images/logo_profile.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

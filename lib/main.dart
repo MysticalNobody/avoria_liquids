@@ -73,8 +73,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         }
                     )
                   ],
-                  // Here we take the value from the MyHomePage object that was created by
-                  // the App.build method, and use it to set our appbar title.
                   title: new Image.asset(
                     "images/logo.png", fit: BoxFit.contain, width: 65.0,),
                 ),
@@ -96,18 +94,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],),
                       ),
                       new Container(
-                        child: new CarouselSlider(
-                          items: <Widget>[
-                            new Image.asset("images/slider/1.png"),
-                            new Image.asset("images/slider/2.png"),
-                          ],
-                          viewportFraction: 1.0,
-                          aspectRatio: 1.0
-                        ),
+                        height: 300.0,
                         width: MediaQuery
                             .of(context)
                             .size
                             .width,
+                        child: new PageView(
+                          children: <Widget>[
+                            new Image.asset("images/slider/1.png",fit: BoxFit.fitWidth,),
+                            new Image.asset("images/slider/2.png",fit: BoxFit.fitWidth),
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -130,8 +127,8 @@ class _MyHomePageState extends State<MyHomePage> {
             onOpen: (bool left) {},
             onOffsetChange: (double offset) {
               setState(() {
-                bg = offset > 0 ? Profile.bg : Menu
-                    .bg; //Если offset >  0, то левое меню, если < 0 то правое
+                bg = offset > 0 ? Profile.bg
+                    : Menu.bg; //Если offset >  0, то левое меню, если < 0 то правое
               });
             }
         )

@@ -1,4 +1,3 @@
-import 'package:avoria_liquids/models/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:avoria_liquids/widgets/dropdown.dart' as blueDropDown;
 
@@ -9,7 +8,7 @@ class ProfileMenu extends StatelessWidget {
         padding: new EdgeInsets.only(left: 45.0, top: MediaQuery
             .of(context)
             .size
-            .height*0.1),
+            .height*0.08),
         child: new Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
@@ -22,7 +21,7 @@ class ProfileMenu extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       new Container(
-                          width: 68.0,
+                          width: 70.0,
                           height: 20.0,
                           child: new FlatButton(
                               onPressed: null,
@@ -30,21 +29,24 @@ class ProfileMenu extends StatelessWidget {
                                   color: Theme
                                       .of(context)
                                       .primaryColor,
-                                  fontSize: 10.0))
+                                  fontSize: 13.0))
                           )
                       ),
                       new Container(
-                          width: 110.0,
+                          width: 123.0,
                           height: 20.0,
                           child: new FlatButton(
                               onPressed: null,
                               child: new Text("REGISTERIERUNG",
-                                style: new TextStyle(fontSize: 9.0),))
+                                style: new TextStyle(fontSize: 11.0),))
                       )
                     ])
               ],
             ),
-            new Padding(padding: new EdgeInsets.only(top: 20.0), child: new Row(
+            new Padding(padding: new EdgeInsets.only(top: MediaQuery
+                .of(context)
+                .size
+                .height*0.04), child: new Row(
                 children: <Widget>[
                   new blueDropDown.DropdownButtonHideUnderline(
                       child: new blueDropDown.DropdownButton<String>(
@@ -79,7 +81,10 @@ class ProfileMenu extends StatelessWidget {
                 ])
             ),
             new Padding(
-                padding: new EdgeInsets.only(top: 20.0),
+                padding: new EdgeInsets.only(top: MediaQuery
+                    .of(context)
+                    .size
+                    .height*0.04),
                 child: new Row(children: <Widget>[
                   new Icon(Icons.favorite, color: Theme
                       .of(context)
@@ -90,13 +95,16 @@ class ProfileMenu extends StatelessWidget {
                           "MERKZETTEL", style: new TextStyle(color: Theme
                           .of(context)
                           .primaryColor,
-                          fontSize: 12.0,
+                          fontSize: 14.0,
                           fontWeight: FontWeight.w500))
                   )
                 ])),
 
             new Padding(
-                padding: new EdgeInsets.only(top: 20.0),
+                padding: new EdgeInsets.only(top: MediaQuery
+                    .of(context)
+                    .size
+                    .height*0.04),
                 child: new Row(children: <Widget>[
                   new Image.asset("icons/shopping_cart.png"),
                   new Padding(
@@ -105,63 +113,79 @@ class ProfileMenu extends StatelessWidget {
                           "0,00€", style: new TextStyle(color: Theme
                           .of(context)
                           .hintColor,
-                          fontSize: 24.0,
+                          fontSize: 26.0,
                           fontWeight: FontWeight.w200))
                   )
                 ])),
             new Padding(
-                padding: new EdgeInsets.only(top: 20.0),
+                padding: new EdgeInsets.only(top: MediaQuery
+                    .of(context)
+                    .size
+                    .height*0.04),
                 child: new Row(
                     children: <Widget>[
                       new Text(
                           "ZAHLUNG & VERSAND", style: new TextStyle(color: Theme
                           .of(context)
                           .primaryColor,
-                          fontSize: 10.0,
+                          fontSize: 13.0,
                           fontWeight: FontWeight.w500))
                     ]
                 )
             ),
             new Padding(
-                padding: new EdgeInsets.only(top: 15.0),
+                padding: new EdgeInsets.only(top: MediaQuery
+                    .of(context)
+                    .size
+                    .height*0.03),
                 child: new Row(
                     children: <Widget>[new Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           new Text(
                               "VERSANDKOSTEN",
                               style: new TextStyle(color: Theme
                                   .of(context)
                                   .hintColor,
-                                  fontSize: 9.0)),
+                                  fontSize: 11.0)),
 
                           new Padding(
-                              padding: new EdgeInsets.only(top: 10.0),
+                              padding: new EdgeInsets.only(top: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height*0.015),
                               child: new Text(
                                   "ZAHLUNGSAETEN",
                                   style: new TextStyle(color: Theme
                                       .of(context)
                                       .hintColor,
-                                      fontSize: 9.0)))
+                                      fontSize: 10.0)))
                         ]
                     )
                     ])
             ),
             new Padding(
-                padding: new EdgeInsets.only(top: 20.0),
+                padding: new EdgeInsets.only(top: MediaQuery
+                    .of(context)
+                    .size
+                    .height*0.04),
                 child: new Row(
                     children: <Widget>[
                       new Text(
                           "RECHTLICHES", style: new TextStyle(color: Theme
                           .of(context)
                           .primaryColor,
-                          fontSize: 10.0,
+                          fontSize: 13.0,
                           fontWeight: FontWeight.w500))
                     ]
                 )
             ),
 
             new Padding(
-                padding: new EdgeInsets.only(top: 15.0),
+                padding: new EdgeInsets.only(top: MediaQuery
+                    .of(context)
+                    .size
+                    .height*0.03),
                 child: new Row(
                     children: <Widget>[
                       new Column(
@@ -172,37 +196,49 @@ class ProfileMenu extends StatelessWidget {
                               style: new TextStyle(color: Theme
                                   .of(context)
                                   .hintColor,
-                                  fontSize: 9.0),),
+                                  fontSize: 10.0),),
 
                             new Padding(
-                                padding: new EdgeInsets.only(top: 10.0),
+                                padding: new EdgeInsets.only(top: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height*0.015),
                                 child: new Text(
                                     "AGB",
                                     style: new TextStyle(color: Theme
                                         .of(context)
                                         .hintColor,
-                                        fontSize: 9.0))),
+                                        fontSize: 10.0))),
                             new Padding(
-                                padding: new EdgeInsets.only(top: 10.0),
+                                padding: new EdgeInsets.only(top: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height*0.015),
                                 child: new Text(
                                     "DATENSCHUTZ",
                                     style: new TextStyle(color: Theme
                                         .of(context)
                                         .hintColor,
-                                        fontSize: 9.0))),
+                                        fontSize: 10.0))),
                             new Padding(
-                                padding: new EdgeInsets.only(top: 10.0),
+                                padding: new EdgeInsets.only(top: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height*0.015),
                                 child: new Text(
                                     "WIDERRUFSBELEHRUG",
                                     style: new TextStyle(color: Theme
                                         .of(context)
                                         .hintColor,
-                                        fontSize: 9.0))),
+                                        fontSize: 10.0))),
                           ]
                       )
                     ])
             ),
-            new Padding(padding: new EdgeInsets.only(top: 20.0), child: new Row(
+            new Padding(padding: new EdgeInsets.only(top: MediaQuery
+                .of(context)
+                .size
+                .height*0.03), child: new Row(
                 children: <Widget>[
                   new Image.asset("images/phone.png"),
                   new Padding(padding: new EdgeInsets.only(left: 25.0, top: 4.0), child:

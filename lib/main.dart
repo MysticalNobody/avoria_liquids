@@ -1,11 +1,11 @@
 import 'package:avoria_liquids/profile_menu.dart';
-import 'package:avoria_liquids/models/menu.dart';
-import 'package:avoria_liquids/models/profile.dart';
 import 'package:avoria_liquids/items_menu.dart';
+import 'package:avoria_liquids/widgets/in_assortiment.dart';
 import 'package:avoria_liquids/widgets/main_image_cart.dart';
 import 'package:avoria_liquids/widgets/residemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -216,7 +216,59 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                   child: new ImageCart(
                                       imgPath: "images/main/5.png",
                                       btnText: "OFFLINE STORES")),
-
+                              new Stack(
+                                children: <Widget>[
+                                  new Positioned.fill(child: new Image.asset(
+                                    "images/bottom_trangle.png",
+                                    alignment: Alignment.bottomRight,)),
+                                  new Padding(
+                                      padding: new EdgeInsets.only(top: 30.0),
+                                      child: new InAssortiment(
+                                          title: "NEU IM SORTIMENT")),
+                                ],
+                              ),
+                              new Container(
+                                color: const Color(0xFF313131),
+                                height: 80.0,
+                                alignment: Alignment.bottomRight,
+                                child: new Column(
+                                  children: <Widget>[
+                                    new Padding(
+                                        padding: new EdgeInsets.only(top: 18.0),
+                                        child: new Center(
+                                            child: new InkWell(
+                                                child: new Text(
+                                                    "ZUR KLASSISCHEN WEBSEITE",
+                                                    style: new TextStyle(
+                                                        color: Theme
+                                                            .of(context)
+                                                            .primaryColor,
+                                                        fontSize: 18.0,
+                                                        decoration: TextDecoration
+                                                            .underline,
+                                                        fontWeight: FontWeight
+                                                            .w300)),
+                                                onTap: () =>
+                                                    () async {
+                                                  const url = 'https://www.avoria-liquids.de/';
+                                                  await launch(url);
+                                                }
+                                            )
+                                        )
+                                    ),
+                                    new Padding(
+                                        padding: new EdgeInsets.only(top: 22.0),
+                                        child: new Center(
+                                            child: new Text(
+                                              "COPYRIGHT 2018 BY AVORIA GMBH MOBILE SHOP BY SHOPGATE",
+                                              style: new TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 10.0),)
+                                        )
+                                    )
+                                  ],
+                                ),
+                              )
                             ]
                         )
                     )

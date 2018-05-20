@@ -11,7 +11,10 @@ class ItemsMenu extends StatelessWidget {
             .of(context)
             .size
             .height * 0.7,
-            padding: new EdgeInsets.only(left: 115.0, top: 50.0),
+            padding: new EdgeInsets.only( top: MediaQuery
+                .of(context)
+                .size
+                .height*0.05),
             child: new ListView.builder(
               itemExtent: 31.0,
               itemCount: Menu.menus.length,
@@ -29,7 +32,7 @@ class ItemsMenu extends StatelessWidget {
               },
             )),
         new Container(
-            padding: new EdgeInsets.only(left: 125.0),
+          padding: new EdgeInsets.only(left: 10.0),
             height: 150.0,
             child: new ListView(
               itemExtent: 40.0,

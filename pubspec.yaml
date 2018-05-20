@@ -37,9 +37,20 @@ flutter:
     - icons/service_hilfe.png
     - icons/kontakt.png
     - icons/car.png
+    - icons/timer.png
+    - icons/shopping_cart.png
     - images/slider/1.png
     - images/slider/2.png
     - images/logo_profile.png
+    - images/germany.png
+    - images/euro.png
+    - images/phone.png
+    - images/email.png
+    - images/main/1.png
+    - images/main/2.png
+    - images/main/3.png
+    - images/main/4.png
+    - images/main/5.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

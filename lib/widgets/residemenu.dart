@@ -6,6 +6,7 @@
 
 library residemenu;
 
+import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -20,12 +21,16 @@ class ResideMenu extends StatefulWidget {
   final Widget child;
 
   final ScrollDirection direction;
+
   //left or right Menu View
   final Widget leftView, rightView;
+
   //shadow elevation
   final double elevation;
+
   // it will control the menu Action,such as openMenu,closeMenu
   MenuController controller;
+
   // used to set bottom bg and color
   BoxDecoration decoration;
 
@@ -35,36 +40,34 @@ class ResideMenu extends StatefulWidget {
 
   final OnOffsetChange onOffsetChange;
 
-  ResideMenu.scafford(
-      {@required this.child,
-        Widget leftBuilder,
-        MenuScaffold leftScaffold,
-        MenuScaffold rightScaffold,
-        this.decoration: const BoxDecoration(),
-        this.direction: ScrollDirection.LEFT,
-        this.elevation: 12.0,
-        this.onOpen,
-        this.onClose,
-        this.onOffsetChange,
-        this.controller,
-        Key key})
+  ResideMenu.scafford({@required this.child,
+    Widget leftBuilder,
+    MenuScaffold leftScaffold,
+    MenuScaffold rightScaffold,
+    this.decoration: const BoxDecoration(),
+    this.direction: ScrollDirection.LEFT,
+    this.elevation: 12.0,
+    this.onOpen,
+    this.onClose,
+    this.onOffsetChange,
+    this.controller,
+    Key key})
       : assert(child != null),
         leftView = leftScaffold,
         rightView = rightScaffold,
         super(key: key);
 
-  ResideMenu.custom(
-      {@required this.child,
-        this.leftView,
-        this.rightView,
-        this.decoration: const BoxDecoration(color: const Color(0xff0000)),
-        this.direction: ScrollDirection.LEFT,
-        this.elevation: 12.0,
-        this.onOpen,
-        this.onClose,
-        this.onOffsetChange,
-        this.controller,
-        Key key})
+  ResideMenu.custom({@required this.child,
+    this.leftView,
+    this.rightView,
+    this.decoration: const BoxDecoration(color: const Color(0xff0000)),
+    this.direction: ScrollDirection.LEFT,
+    this.elevation: 12.0,
+    this.onOpen,
+    this.onClose,
+    this.onOffsetChange,
+    this.controller,
+    Key key})
       : assert(child != null),
         super(key: key);
 
@@ -75,10 +78,13 @@ class ResideMenu extends StatefulWidget {
 class _ResideMenuState extends State<ResideMenu> with TickerProviderStateMixin {
   // the last move point
   double _lastRawX = 0.0;
+
   //determine width
   double _width = 0.0;
+
   //check if user scroll left,or is Right
   bool _isLeft = true;
+
   // this will controll ContainerAnimation
   AnimationController _menuController;
 
@@ -88,7 +94,7 @@ class _ResideMenuState extends State<ResideMenu> with TickerProviderStateMixin {
 
   void _onScrollMove(DragUpdateDetails details) {
     double offset = (details.globalPosition.dx - _lastRawX) / _width * 2.0;
-    widget.controller.value += offset;
+    widget.controller.value += BezierBlend(offset);
     _lastRawX = details.globalPosition.dx;
 
     if (widget.controller.value > 0) {
@@ -105,10 +111,17 @@ class _ResideMenuState extends State<ResideMenu> with TickerProviderStateMixin {
     }
   }
 
+  double BezierBlend(double t) {
+      return (t * t * t * (4 - 3 * t));
+  }
+
   void _onScrollEnd(DragEndDetails details) {
-    if (widget.controller.value > 0.5) {
+    if (widget.controller.value > 0.02 && widget.controller.value < 0.45||
+        widget.controller.value > 0.98 && widget.controller.value < 1) {
       widget.controller.openMenu(true);
-    } else if (widget.controller.value < -0.5) {
+    } else
+    if (widget.controller.value < -0.02 && widget.controller.value > -0.45 ||
+        widget.controller.value < -0.98 && widget.controller.value > -1) {
       widget.controller.openMenu(false);
     } else {
       widget.controller.closeMenu();
@@ -117,7 +130,7 @@ class _ResideMenuState extends State<ResideMenu> with TickerProviderStateMixin {
   }
 
   void _changeState(bool left) {
-    if(left){
+    if (left) {
       widget.decoration = new BoxDecoration(
           image: new DecorationImage(
               image: new AssetImage("images/bg_profile.png"),
@@ -151,13 +164,12 @@ class _ResideMenuState extends State<ResideMenu> with TickerProviderStateMixin {
         } else {
           _changeState(false);
         }
-      })
-      ..addListener(() {
-        _menuController.value = 2.0 - widget.controller.value.abs();
-        if (widget.onOffsetChange != null) {
-          widget.onOffsetChange(widget.controller.value.abs());
-        }
-      })
+      })..addListener(() {
+      _menuController.value = 2.0 - widget.controller.value.abs();
+      if (widget.onOffsetChange != null) {
+        widget.onOffsetChange(widget.controller.value.abs());
+      }
+    })
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           if (widget.controller.isOpenLeft) {
@@ -214,8 +226,10 @@ class _ResideMenuState extends State<ResideMenu> with TickerProviderStateMixin {
             ),
             new _MenuTransition(
               valueControll: _menuController,
-              child:  new Container(
-                  margin: new EdgeInsets.only(left: (!_isLeft?cons.biggest.width*0.3:0.0),right:(_isLeft?cons.biggest.width*0.3:0.0)),
+              child: new Container(
+                  margin: new EdgeInsets.only(
+                      left: (!_isLeft ? cons.biggest.width * 0.3 : 0.0),
+                      right: (_isLeft ? cons.biggest.width * 0.3 : 0.0)),
                   child: _isLeft ? widget.leftView : widget.rightView
               ),
             ),
@@ -228,7 +242,7 @@ class _ResideMenuState extends State<ResideMenu> with TickerProviderStateMixin {
                     child: widget.child,
                     decoration: new BoxDecoration(boxShadow: <BoxShadow>[
                       new BoxShadow(
-                        color: const Color(0xff4e4e4e),
+                        color: const Color(0x78ccccff),
                         offset: const Offset(0.0, 0.0),
                         blurRadius: 16.0,
                       ),
@@ -255,17 +269,16 @@ class ResideMenuItem extends StatelessWidget {
   final double midSpacing, leftSpacing, rightSpacing;
 
 
-  const ResideMenuItem(
-      {Key key,
-        this.title: "菜单物品",
-        this.titleStyle: const TextStyle(
-            inherit: true, color: const Color(0xffdddddd), fontSize: 15.0),
-        this.icon: const Text(""),
-        this.right: const Text(""),
-        this.height: 50.0,
-        this.leftSpacing: 40.0,
-        this.rightSpacing: 50.0,
-        this.midSpacing: 30.0});
+  const ResideMenuItem({Key key,
+    this.title: "菜单物品",
+    this.titleStyle: const TextStyle(
+        inherit: true, color: const Color(0xffdddddd), fontSize: 15.0),
+    this.icon: const Text(""),
+    this.right: const Text(""),
+    this.height: 50.0,
+    this.leftSpacing: 40.0,
+    this.rightSpacing: 50.0,
+    this.midSpacing: 30.0});
 
 
   @override
@@ -294,10 +307,9 @@ class ResideMenuItem extends StatelessWidget {
 class _MenuTransition extends AnimatedWidget {
   final Widget child;
 
-  _MenuTransition(
-      {@required this.child,
-        @required Animation<double> valueControll,
-        Key key})
+  _MenuTransition({@required this.child,
+    @required Animation<double> valueControll,
+    Key key})
       : super(key: key, listenable: valueControll);
 
   Animation<double> get valueControll => listenable;
@@ -310,9 +322,9 @@ class _MenuTransition extends AnimatedWidget {
       double width = cons.biggest.width;
       double height = cons.biggest.height;
       final Matrix4 transform = new Matrix4.identity()
-        ..scale(valueControll.value.abs(), valueControll.value.abs(), 1.0);
+        ..scale(1.0, 1.0, 1.0);
       return new Opacity(
-        opacity: 2.0 - valueControll.value,
+        opacity: 1.0,
         child: new Transform(
             transform: transform,
             child: child,
@@ -382,13 +394,12 @@ class MenuScaffold extends StatelessWidget {
   final double itemExtent;
   final double topMargin;
 
-  MenuScaffold(
-      {Key key,
-        @required this.children,
-        this.topMargin:100.0,
-        Widget header,
-        Widget footer,
-        this.itemExtent: 40.0})
+  MenuScaffold({Key key,
+    @required this.children,
+    this.topMargin: 100.0,
+    Widget header,
+    Widget footer,
+    this.itemExtent: 40.0})
       : assert(children != null),
         header = header ?? new Container(height: 20.0),
         footer = footer ?? new Container(height: 20.0),
@@ -398,7 +409,7 @@ class MenuScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Container(
-      padding: new EdgeInsets.only(top:this.topMargin),
+      padding: new EdgeInsets.only(top: this.topMargin),
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[

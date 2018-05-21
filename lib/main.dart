@@ -48,7 +48,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: new ResideMenu.custom(
-            direction: ScrollDirection.BOTH,
             controller: _menuController,
             rightView: new ItemsMenu(),
             leftView: new ProfileMenu(),

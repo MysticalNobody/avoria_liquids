@@ -112,16 +112,16 @@ class _ResideMenuState extends State<ResideMenu> with TickerProviderStateMixin {
   }
 
   double BezierBlend(double t) {
-      return (t * t * t * (4 - 3 * t));
+      return (t * t * t * (4 - 2 * t));
   }
 
   void _onScrollEnd(DragEndDetails details) {
-    if (widget.controller.value > 0.02 && widget.controller.value < 0.45||
-        widget.controller.value > 0.98 && widget.controller.value < 1) {
+    if (widget.controller.value > 0.005 && widget.controller.value < 0.45||
+        widget.controller.value > 0.995 && widget.controller.value < 1) {
       widget.controller.openMenu(true);
     } else
-    if (widget.controller.value < -0.02 && widget.controller.value > -0.45 ||
-        widget.controller.value < -0.98 && widget.controller.value > -1) {
+    if (widget.controller.value < -0.005 && widget.controller.value > -0.45 ||
+        widget.controller.value < -0.995 && widget.controller.value > -1) {
       widget.controller.openMenu(false);
     } else {
       widget.controller.closeMenu();

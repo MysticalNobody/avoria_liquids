@@ -88,11 +88,11 @@ class _ResideMenuState extends State<ResideMenu> with TickerProviderStateMixin {
   // this will controll ContainerAnimation
   AnimationController _menuController;
 
-  void _onScrollStart(DragStartDetails details) {
-    _lastRawX = details.globalPosition.dx;
+  void _onScrollStart(DragStartDetails details) {/*
+    _lastRawX = details.globalPosition.dx;*/
   }
 
-  void _onScrollMove(DragUpdateDetails details) {
+  void _onScrollMove(DragUpdateDetails details) {/*
     double offset = (details.globalPosition.dx - _lastRawX) / _width * 2.0;
     widget.controller.value += BezierBlend(offset);
     _lastRawX = details.globalPosition.dx;
@@ -108,14 +108,14 @@ class _ResideMenuState extends State<ResideMenu> with TickerProviderStateMixin {
           image: new DecorationImage(
               image: new AssetImage("images/bg_menu.png"),
               fit: BoxFit.cover));
-    }
+    }*/
   }
-
+/*
   double BezierBlend(double t) {
       return (t * t * t * (4 - 2 * t));
-  }
+  }*/
 
-  void _onScrollEnd(DragEndDetails details) {
+  void _onScrollEnd(DragEndDetails details) {/*
     if (widget.controller.value > 0.005 && widget.controller.value < 0.45||
         widget.controller.value > 0.995 && widget.controller.value < 1) {
       widget.controller.openMenu(true);
@@ -125,7 +125,7 @@ class _ResideMenuState extends State<ResideMenu> with TickerProviderStateMixin {
       widget.controller.openMenu(false);
     } else {
       widget.controller.closeMenu();
-    }
+    }*/
     _lastRawX = 0.0;
   }
 
